@@ -1,0 +1,358 @@
+[
+    {
+        "id": "bb5d5801e07f01ec",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e8d59b54d2539b05",
+        "type": "ui_template",
+        "z": "bb5d5801e07f01ec",
+        "group": "group_k1",
+        "name": "Camera",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "format": "<div style=\"width:100%; overflow:hidden;\">\n  <img \n    src=\"http://10.138.182.28:81/stream\"\n    style=\"\n      width:100%;\n      max-height:250px;\n      object-fit:cover;\n      display:block;\n    \"\n  >\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f0c6e7909db82d1c",
+        "type": "inject",
+        "z": "bb5d5801e07f01ec",
+        "name": "Get Temp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "5da332969025f668"
+            ]
+        ]
+    },
+    {
+        "id": "5da332969025f668",
+        "type": "http request",
+        "z": "bb5d5801e07f01ec",
+        "name": "HTTP Temp",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.138.182.28/dht-temp",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "4449e9bea2a923a1"
+            ]
+        ]
+    },
+    {
+        "id": "c4b82304d2768cc4",
+        "type": "ui_text",
+        "z": "bb5d5801e07f01ec",
+        "group": "group_k1",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Temperature",
+        "format": "{{msg.payload}} °C",
+        "layout": "",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 810,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d5f981cbfaa40075",
+        "type": "inject",
+        "z": "bb5d5801e07f01ec",
+        "name": "Get Hum",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 240,
+        "wires": [
+            [
+                "7e383f5073d9d3ce"
+            ]
+        ]
+    },
+    {
+        "id": "7e383f5073d9d3ce",
+        "type": "http request",
+        "z": "bb5d5801e07f01ec",
+        "name": "HTTP Hum",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.138.182.28/dht-humidity",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "246f84e3bd25a1de"
+            ]
+        ]
+    },
+    {
+        "id": "d36a2f914609eb99",
+        "type": "ui_text",
+        "z": "bb5d5801e07f01ec",
+        "group": "group_k1",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Humidity",
+        "format": "{{msg.payload}} %",
+        "layout": "",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 800,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2ce1b0114ddce2f4",
+        "type": "ui_text",
+        "z": "bb5d5801e07f01ec",
+        "group": "group_k1",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Status AC",
+        "format": "{{msg.payload}}",
+        "layout": "",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 560,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "95e4d9178edcc594",
+        "type": "ui_button",
+        "z": "bb5d5801e07f01ec",
+        "name": "",
+        "group": "group_k1",
+        "order": 5,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "AC ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "#00a000",
+        "className": "",
+        "icon": "",
+        "payload": "AC ON",
+        "payloadType": "str",
+        "topic": "",
+        "topicType": "str",
+        "x": 330,
+        "y": 480,
+        "wires": [
+            [
+                "2ce1b0114ddce2f4",
+                "86ba6a6fecdfb030"
+            ]
+        ]
+    },
+    {
+        "id": "86ba6a6fecdfb030",
+        "type": "http request",
+        "z": "bb5d5801e07f01ec",
+        "name": "AC ON",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.138.182.28/relay/on",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 540,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8852344bf3eba6af",
+        "type": "ui_button",
+        "z": "bb5d5801e07f01ec",
+        "group": "group_k1",
+        "order": 6,
+        "width": 3,
+        "height": 1,
+        "label": "AC OFF",
+        "bgcolor": "#d00000",
+        "payload": "AC OFF",
+        "payloadType": "str",
+        "x": 330,
+        "y": 530,
+        "wires": [
+            [
+                "2ce1b0114ddce2f4",
+                "f512b2b5c56a94c3"
+            ]
+        ]
+    },
+    {
+        "id": "f512b2b5c56a94c3",
+        "type": "http request",
+        "z": "bb5d5801e07f01ec",
+        "name": "AC OFF",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://10.138.182.28/relay/off",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 540,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4449e9bea2a923a1",
+        "type": "function",
+        "z": "bb5d5801e07f01ec",
+        "name": "function Temp",
+        "func": "let data = String(msg.payload);\n\nif (\n    data.includes(\"RequestError\") ||\n    data.includes(\"ETIMEDOUT\") ||\n    data.includes(\"ECONNREFUSED\") ||\n    data === \"\" ||\n    data === \"undefined\"\n) {\n    msg.payload = \"Sensor Tidak Terdeteksi\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 160,
+        "wires": [
+            [
+                "c4b82304d2768cc4"
+            ]
+        ]
+    },
+    {
+        "id": "246f84e3bd25a1de",
+        "type": "function",
+        "z": "bb5d5801e07f01ec",
+        "name": "function Hum",
+        "func": "let data = String(msg.payload);\n\nif (\n    data.includes(\"RequestError\") ||\n    data.includes(\"ETIMEDOUT\") ||\n    data.includes(\"ECONNREFUSED\") ||\n    data === \"\" ||\n    data === \"undefined\"\n) {\n    msg.payload = \"Sensor Tidak Terdeteksi\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "d36a2f914609eb99"
+            ]
+        ]
+    },
+    {
+        "id": "group_k1",
+        "type": "ui_group",
+        "name": "Kelas 1",
+        "tab": "tab_monitor",
+        "order": 1,
+        "disp": true,
+        "width": "6"
+    },
+    {
+        "id": "tab_monitor",
+        "type": "ui_tab",
+        "name": "Monitoring Kelas",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "aa51a12f63b11324",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
